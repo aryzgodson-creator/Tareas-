@@ -1,0 +1,17 @@
+% eliminar_duplicados(ListaOriginal, ListaSinDuplicados)
+% Devuelve ListaSinDuplicados con solo la primera aparición de cada elemento,
+% manteniendo el orden relativo.
+
+% Caso base: La lista vacía no tiene duplicados.
+eliminar_duplicados([], []).
+
+% Caso general: procesar la lista manteniendo el orden y eliminando duplicados
+eliminar_duplicados([Cabeza|Cola], [Cabeza|Resultado]) :-
+    eliminar_todas(Cabeza, Cola, ColaFiltrada),
+    eliminar_duplicados(ColaFiltrada, Resultado).
+
+% eliminar_todas(Elemento, Lista, ListaFiltrada)
+% Elimina todas las apariciones de Elemento en Lista
+eliminar_todas(_, [], []).
+eliminar_todas(X, [X|T], R) :- !, eliminar_todas(X, T, R).
+eliminar_todas(X, [Y|T], [Y|R]) :- eliminar_todas(X, T, R).
